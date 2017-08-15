@@ -6,25 +6,24 @@ var sinonChai = require("sinon-chai");
 var expect = chai.expect;
 chai.use(sinonChai);
 
-var main = require("../lib/main.js");
+var CodeNum = require("../lib/main.js");
 
 
-describe("测试描述", function(){
-    sinon.spy(console, 'log');
-
-    it("测试用例1", function(){
-
-        var result = main();
-        var expect_string = '';
+describe("编码转换", function(){
+    it("数字编码", function(){
+        let code=new CodeNum();
+        let numString='88595-0001';
+        var result=code.zipCode(numString);
+        var expect_string = '||::|:|::|::|:|:|:|:::|:|:||:::||:::||::::::||:|::||';
         
         expect(expect_string).to.equal(result);
     });
 
-    it("测试用例2", function(){
+    it("编码转数字", function(){
+        let code=new CodeNum();
 
-        main();
-        var result = _.flatten(console.log.args).join("\n");
-        var expect_string = '';
+        var result = code.postCode('||::|:|::|::|:|:|:|:::|:|:||:::||:::||::::::||:|::||');
+        var expect_string = '88595-0001';
 
         expect(expect_string).to.equal(result);
     });
